@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include <HAL/generics.hpp>
+#include <hal/generics.hpp>
 
 namespace HAL {
 namespace GIO {

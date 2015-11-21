@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include <HAL/generics.hpp>
+#include <hal/generics.hpp>
 
 /* remove this to disable bounds and size checking on bitops */
 #define DEBUG_BITOPS

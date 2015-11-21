@@ -5,9 +5,8 @@
  *      Author: James
  */
 
-#include <HAL/dma.hpp>
-
-#include <MAL/stm32f303vc.hpp>
+#include <hal/dma.hpp>
+#include <mal/stm32f303vc.hpp>
 
 namespace HAL {
 namespace DMA {

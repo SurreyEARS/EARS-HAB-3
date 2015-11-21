@@ -5,9 +5,9 @@
  *      Author: James
  */
 
-#include <HAL/generics.hpp>
-#include <HAL/gio.hpp>
-#include <MAL/stm32f303vc.hpp>
+#include <hal/generics.hpp>
+#include <hal/gio.hpp>
+#include <mal/stm32f303vc.hpp>
 
 #include <stm32f3xx_hal_rcc.h>
 

@@ -81,7 +81,7 @@
 								<option id="com.atollic.truestudio.gpp.optimization.prep_data.865426884" name="Prepare dead data removal" superClass="com.atollic.truestudio.gpp.optimization.prep_data" value="true" valueType="boolean"/>
 								<option id="com.atollic.truestudio.gpp.optimization.fno_rtti.542747701" name="Disable RTTI" superClass="com.atollic.truestudio.gpp.optimization.fno_rtti" value="true" valueType="boolean"/>
 								<option id="com.atollic.truestudio.gpp.optimization.fno_exceptions.794957376" name="Disable exception handling" superClass="com.atollic.truestudio.gpp.optimization.fno_exceptions" value="true" valueType="boolean"/>
-								<option id="com.atollic.truestudio.gpp.misc.otherflags.176590407" superClass="com.atollic.truestudio.gpp.misc.otherflags" value="-std=c++11" valueType="string"/>
+								<option id="com.atollic.truestudio.gpp.misc.otherflags.176590407" name="Other options" superClass="com.atollic.truestudio.gpp.misc.otherflags" value="-std=c++11" valueType="string"/>
 								<inputType id="com.atollic.truestudio.gpp.input.1590286121" superClass="com.atollic.truestudio.gpp.input"/>
 							</tool>
 							<tool id="com.atollic.truestudio.exe.debug.toolchain.ldcc.2037166407" name="C++ Linker" superClass="com.atollic.truestudio.exe.debug.toolchain.ldcc">

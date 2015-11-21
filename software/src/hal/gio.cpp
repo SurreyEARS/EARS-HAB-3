@@ -5,10 +5,9 @@
  *      Author: James
  */
 
-#include <HAL/gio.hpp>
-#include <EXT/bitops.hpp>
-
-#include <MAL/stm32f303vc.hpp>
+#include <hal/gio.hpp>
+#include <ext/bitops.hpp>
+#include <mal/stm32f303vc.hpp>
 
 using namespace MAL::F3C;
 

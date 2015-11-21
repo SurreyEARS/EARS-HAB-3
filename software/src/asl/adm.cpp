@@ -5,9 +5,8 @@
  *      Author: James
  */
 
-#include <HAL/generics.hpp>
-
-#include "ASL/adm.hpp"
+#include <hal/generics.hpp>
+#include <asl/adm.hpp>
 
 namespace ASL {
 namespace ADM {
