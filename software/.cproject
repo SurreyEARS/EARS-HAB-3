@@ -16,15 +16,25 @@
 					<folderInfo id="com.atollic.truestudio.exe.debug.484571405." name="/" resourcePath="">
 						<toolChain id="com.atollic.truestudio.exe.debug.toolchain.1133751809" name="Atollic ARM Tools" superClass="com.atollic.truestudio.exe.debug.toolchain">
 							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="com.atollic.truestudio.exe.debug.toolchain.platform.2081864380" isAbstract="false" name="Debug platform" superClass="com.atollic.truestudio.exe.debug.toolchain.platform"/>
-							<builder buildPath="${workspace_loc:/HAB3}/Debug" customBuilderProperties="toolChainpathType=1|toolChainpathString=B:/Program Files (x86)/Atollic/TrueSTUDIO for ARM 5.4.0/ARMTools/bin|" id="com.atollic.truestudio.mbs.builder1.1004431110" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="CDT Internal Builder" superClass="com.atollic.truestudio.mbs.builder1"/>
+							<builder buildPath="${workspace_loc:/HAB3}/Debug" customBuilderProperties="toolChainpathType=1|toolChainpathString=B:/Program Files (x86)/Atollic/TrueSTUDIO for ARM 5.4.0/ARMTools/bin|" id="com.atollic.truestudio.mbs.builder1.1004431110" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="CDT Internal Builder" superClass="com.atollic.truestudio.mbs.builder1">
+								<outputEntries>
+									<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="outputPath" name="Debug"/>
+									<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="outputPath" name="Release"/>
+								</outputEntries>
+							</builder>
 							<tool id="com.atollic.truestudio.exe.debug.toolchain.as.908022377" name="Assembler" superClass="com.atollic.truestudio.exe.debug.toolchain.as">
 								<option id="com.atollic.truestudio.common_options.target.endianess.1695804441" name="Endianess" superClass="com.atollic.truestudio.common_options.target.endianess"/>
 								<option id="com.atollic.truestudio.common_options.target.mcpu.985101882" name="Microcontroller" superClass="com.atollic.truestudio.common_options.target.mcpu" value="STM32F303VC" valueType="enumerated"/>
 								<option id="com.atollic.truestudio.common_options.target.instr_set.1843854793" name="Instruction set" superClass="com.atollic.truestudio.common_options.target.instr_set" value="com.atollic.truestudio.common_options.target.instr_set.thumb2" valueType="enumerated"/>
 								<option id="com.atollic.truestudio.common_options.target.fpucore.1701171229" name="FPU" superClass="com.atollic.truestudio.common_options.target.fpucore" value="FPv4-SP-D16" valueType="enumerated"/>
 								<option id="com.atollic.truestudio.common_options.target.fpu.509283851" name="Floating point" superClass="com.atollic.truestudio.common_options.target.fpu" value="com.atollic.truestudio.common_options.target.fpu.hard" valueType="enumerated"/>
-								<option id="com.atollic.truestudio.as.symbols.defined.519827255" name="Defined symbols" superClass="com.atollic.truestudio.as.symbols.defined"/>
-								<option id="com.atollic.truestudio.as.general.incpath.686648637" name="Include path" superClass="com.atollic.truestudio.as.general.incpath"/>
+								<option id="com.atollic.truestudio.as.symbols.defined.519827255" name="Defined symbols" superClass="com.atollic.truestudio.as.symbols.defined" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="HSE_VALUE=8000000"/>
+									<listOptionValue builtIn="false" value="STM32F303xC"/>
+								</option>
+								<option id="com.atollic.truestudio.as.general.incpath.686648637" name="Include path" superClass="com.atollic.truestudio.as.general.incpath" valueType="includePath">
+									<listOptionValue builtIn="false" value="B:/James/Development/Atollic/EARS-HAB-3/software/inc"/>
+								</option>
 								<inputType id="com.atollic.truestudio.as.input.1148775018" name="Input" superClass="com.atollic.truestudio.as.input"/>
 							</tool>
 							<tool id="com.atollic.truestudio.exe.debug.toolchain.gcc.1060987318" name="C Compiler" superClass="com.atollic.truestudio.exe.debug.toolchain.gcc">
@@ -33,11 +43,7 @@
 									<listOptionValue builtIn="false" value="STM32F303xC"/>
 								</option>
 								<option id="com.atollic.truestudio.gcc.directories.select.1776392395" name="Include path" superClass="com.atollic.truestudio.gcc.directories.select" valueType="includePath">
-									<listOptionValue builtIn="false" value="..\Drivers\CMSIS\Include"/>
-									<listOptionValue builtIn="false" value="..\Drivers\CMSIS\Device\ST\STM32F3xx\Include"/>
-									<listOptionValue builtIn="false" value="..\Drivers\STM32F3xx_HAL_Driver\Inc"/>
-									<listOptionValue builtIn="false" value="..\src"/>
-									<listOptionValue builtIn="false" value="../src"/>
+									<listOptionValue builtIn="false" value="B:/James/Development/Atollic/EARS-HAB-3/software/inc"/>
 								</option>
 								<option id="com.atollic.truestudio.common_options.target.endianess.1905682418" name="Endianess" superClass="com.atollic.truestudio.common_options.target.endianess"/>
 								<option id="com.atollic.truestudio.common_options.target.mcpu.1498649268" name="Microcontroller" superClass="com.atollic.truestudio.common_options.target.mcpu" value="STM32F303VC" valueType="enumerated"/>
@@ -66,11 +72,7 @@
 									<listOptionValue builtIn="false" value="STM32F303xC"/>
 								</option>
 								<option id="com.atollic.truestudio.gpp.directories.select.1302576216" name="Include path" superClass="com.atollic.truestudio.gpp.directories.select" valueType="includePath">
-									<listOptionValue builtIn="false" value="..\Drivers\CMSIS\Include"/>
-									<listOptionValue builtIn="false" value="..\Drivers\CMSIS\Device\ST\STM32F3xx\Include"/>
-									<listOptionValue builtIn="false" value="..\Drivers\STM32F3xx_HAL_Driver\Inc"/>
-									<listOptionValue builtIn="false" value="..\src"/>
-									<listOptionValue builtIn="false" value="../src"/>
+									<listOptionValue builtIn="false" value="B:/James/Development/Atollic/EARS-HAB-3/software/inc"/>
 								</option>
 								<option id="com.atollic.truestudio.common_options.target.endianess.19861039" name="Endianess" superClass="com.atollic.truestudio.common_options.target.endianess"/>
 								<option id="com.atollic.truestudio.common_options.target.mcpu.1661918383" name="Microcontroller" superClass="com.atollic.truestudio.common_options.target.mcpu" value="STM32F303VC" valueType="enumerated"/>
@@ -103,7 +105,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Drivers"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="inc"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
@@ -209,7 +211,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Drivers"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="inc"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
@@ -220,9 +222,6 @@
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
 		<project id="HAB3.com.atollic.truestudio.exe.1602200512" name="Executable" projectType="com.atollic.truestudio.exe"/>
 	</storageModule>
-	<storageModule moduleId="scannerConfiguration">
-		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="refreshScope" versionNumber="2">
 		<configuration configurationName="Release">
@@ -231,5 +230,14 @@
 		<configuration configurationName="Debug">
 			<resource resourceType="PROJECT" workspacePath="/HAB3"/>
 		</configuration>
+	</storageModule>
+	<storageModule moduleId="scannerConfiguration">
+		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="com.atollic.truestudio.exe.debug.484571405;com.atollic.truestudio.exe.debug.484571405.;com.atollic.truestudio.exe.debug.toolchain.gpp.499601693;com.atollic.truestudio.gpp.input.1590286121">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.atollic.truestudio.mbs.ARMToolsPerProjectProfileCPP"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.atollic.truestudio.exe.debug.484571405;com.atollic.truestudio.exe.debug.484571405.;com.atollic.truestudio.exe.debug.toolchain.gcc.1060987318;com.atollic.truestudio.gcc.input.975227092">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.atollic.truestudio.mbs.ARMToolsPerProjectProfileC"/>
+		</scannerConfigBuildInfo>
 	</storageModule>
 </cproject>

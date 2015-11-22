@@ -5,11 +5,13 @@
  *      Author: James
  */
 
+#include <hal/mcu.hpp>
+
 #include <hal/generics.hpp>
-#include <hal/gio.hpp>
 #include <mal/stm32f303vc.hpp>
 
-#include <stm32f3xx_hal_rcc.h>
+#include <hal/gio.hpp>
+#include <hal/rcc.hpp>
 
 /* Overflow time at 1ms approximately 49 years */
 static uint32_t systemTicksMs = 0;
@@ -30,21 +32,42 @@ void init()
 	using namespace MAL::CM4;
 	using namespace HAL::GIO;
 
-	SYSTICK.RELOAD.B.reload = HAL_RCC_GetHCLKFreq()/1000 - 1;
+	SYSTICK.RELOAD.B.reload = HAL::RCCM::getSystemClock()/1000U - 1U;
 	SYSTICK.VAL = 0U;
-
-	NVIC_SetPriority (SysTick_IRQn, (1<<__NVIC_PRIO_BITS) - 1);  /* set Priority for Systick Interrupt */
 
 	SYSTICK.CTRL.B.clockSource = 1U;
 	SYSTICK.CTRL.B.interrupt = 1U;
 	SYSTICK.CTRL.B.enable = 1U;
 
 	configurePin(statusPinPort, statusPin, Mode::OUTPUT, Pullups::PULL_UP, Type::PUSH_PULL, Speed::FAST, 0);
-	configurePin(statusPinPort, statusPin + 1, Mode::OUTPUT, Pullups::PULL_UP, Type::PUSH_PULL, Speed::FAST, 0);
 }
 
 uint32_t getTicks(void) {
 	return systemTicksMs;
+}
+
+bool delayWhile(bool(*func)())
+{
+	uint32_t start = getTicks();
+	uint32_t elapsed;
+
+	do {
+		elapsed = getTicks() - start;
+	} while (func() && elapsed < maxDelay);
+
+	return elapsed < maxDelay;
+}
+
+bool delayUntil(bool(*func)())
+{
+	uint32_t start = getTicks();
+	uint32_t elapsed;
+
+	do {
+		elapsed = getTicks() - start;
+	} while (!func() && elapsed < maxDelay);
+
+	return elapsed < maxDelay;
 }
 
 void delayTicks(uint32_t delay) {
@@ -81,4 +104,24 @@ void HAL_MCU_IncrementTicks(void)
 		HAL::GIO::toggle(statusPinPort, statusPin);
 	}
 }
+
+void SystemInit(void)
+{
+	/* Enable FPU access */
+	MAL::CM4::SCB_CPA.CPACR.B.CP10 = 0x3U;
+	MAL::CM4::SCB_CPA.CPACR.B.CP11 = 0x3U;
+
+	/* Set the exception priority grouping - this splits exception handler priority into
+	 * four bits of priority and four bits of sub-priority. Exceptions in the same priority
+	 * group will not override each other; sub-priorities only order the exception queue. */
+	MAL::CM4::SCB.AIRCR.B.PRIGROUP = 0x3U;
+
+	/* Enable prefetching of code from flash. */
+	MAL::F3C::FLASH.ACR.B.PRFTB_E = 1U;
+
+	/* This line will need revisiting if we want to relocate vectors to RAM. For now, flash at offset 0 is fine.
+	 * If you must modify the offset you must also do so in the stm32f30_flash.ld linker description file. */
+	MAL::CM4::SCB.VTOR.R = 0x08000000 | 0x0; /* Flash base address and offset within flash */
 }
+}
+

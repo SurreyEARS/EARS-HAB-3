@@ -5,12 +5,16 @@
  *      Author: James
  */
 
-#include <MAL/stm32f303vc.hpp>
+#include <mal/stm32f303vc.hpp>
 
 namespace MAL {
 namespace CM4 {
 
 volatile SystemTick_t& SYSTICK = *((SystemTick_t*)0xE000E010);
+
+volatile SCB_t& SCB = *((SCB_t*)0xE000ED00);
+volatile SCB_CPA_t& SCB_CPA = *((SCB_CPA_t*)0xE000ED88);
+volatile SCB_FPU_t& SCB_FPU = *((SCB_FPU_t*)0xE000EF34);
 
 }
 
@@ -45,5 +49,9 @@ volatile DMA_CHANNEL_t& DMA2_CH2 = *((DMA_CHANNEL_t*)(DMA2_BASE_ADDR + 0x1C));
 volatile DMA_CHANNEL_t& DMA2_CH3 = *((DMA_CHANNEL_t*)(DMA2_BASE_ADDR + 0x30));
 volatile DMA_CHANNEL_t& DMA2_CH4 = *((DMA_CHANNEL_t*)(DMA2_BASE_ADDR + 0x44));
 volatile DMA_CHANNEL_t& DMA2_CH5 = *((DMA_CHANNEL_t*)(DMA2_BASE_ADDR + 0x58));
+
+volatile RCC_BASE_t& RCCMOD = *((RCC_BASE_t*)0x40021000);
+
+volatile FLASH_t& FLASH = *((FLASH_t*)0x40022000);
 }
 }
