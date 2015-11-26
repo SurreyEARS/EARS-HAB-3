@@ -84,7 +84,7 @@ Discarded input sections
  .data          0x00000000        0x0 src\hal\mcu.o
  .bss           0x00000000        0x0 src\hal\mcu.o
  .text._ZN3HAL3MCU10delayWhileEPFbvE
-                0x00000000       0x48 src\hal\mcu.o
+                0x00000000       0x50 src\hal\mcu.o
  .text._ZN3HAL3MCU11SuspendTickEv
                 0x00000000       0x1c src\hal\mcu.o
  .text._ZN3HAL3MCU10ResumeTickEv
@@ -130,33 +130,21 @@ Discarded input sections
  .text          0x00000000        0x0 src\hal\dma.o
  .data          0x00000000        0x0 src\hal\dma.o
  .bss           0x00000000        0x0 src\hal\dma.o
- .text._ZN3HAL3DMAL5startERVN3MAL3F3C13DMA_CHANNEL_tEPvS6_m
-                0x00000000       0x44 src\hal\dma.o
- .text._ZN3HAL3DMAL18getClearM2MChannelEv
-                0x00000000       0x54 src\hal\dma.o
- .text._ZN3HAL3DMA8startM2MEPvS1_m
-                0x00000000       0x48 src\hal\dma.o
- .text._ZN3HAL3DMA11startM2M_32EPvS1_m
-                0x00000000       0x48 src\hal\dma.o
- .rodata._ZN3HAL3DMAL15memToMemPrimaryE
-                0x00000000        0x4 src\hal\dma.o
- .rodata._ZN3HAL3DMAL17memToMemSecondaryE
-                0x00000000        0x4 src\hal\dma.o
- .data._ZN3HAL3DMAL22memToMemConfigControl8E
-                0x00000000        0x4 src\hal\dma.o
- .data._ZN3HAL3DMAL23memToMemConfigControl32E
-                0x00000000        0x4 src\hal\dma.o
- .debug_info    0x00000000      0x515 src\hal\dma.o
- .debug_abbrev  0x00000000      0x206 src\hal\dma.o
- .debug_aranges
-                0x00000000       0x38 src\hal\dma.o
- .debug_ranges  0x00000000       0x28 src\hal\dma.o
- .debug_line    0x00000000      0x1f9 src\hal\dma.o
- .debug_str     0x00000000      0x3f1 src\hal\dma.o
- .comment       0x00000000       0x83 src\hal\dma.o
- .ARM.attributes
-                0x00000000       0x39 src\hal\dma.o
- .debug_frame   0x00000000       0x88 src\hal\dma.o
+ .text._ZN3HAL3DMA15configureSourceENS0_6SourceEPv
+                0x00000000       0x30 src\hal\dma.o
+ .text._ZN3HAL3DMA8startM2MENS0_6SourceEPvS2_m
+                0x00000000       0x3c src\hal\dma.o
+ .text          0x00000000        0x0 src\hal\dac.o
+ .data          0x00000000        0x0 src\hal\dac.o
+ .bss           0x00000000        0x0 src\hal\dac.o
+ .text._ZN3HAL3DAC6SINGLE7disableEv
+                0x00000000       0x1c src\hal\dac.o
+ .text._ZN3HAL3DAC4DUAL6enableEb
+                0x00000000       0x24 src\hal\dac.o
+ .text._ZN3HAL3DAC4DUAL7setDataEm
+                0x00000000       0x14 src\hal\dac.o
+ .text._ZN3HAL3DAC4DUAL11activateDMAEv
+                0x00000000        0xc src\hal\dac.o
  .text          0x00000000        0x0 src\ext\tiny_printf.o
  .data          0x00000000        0x0 src\ext\tiny_printf.o
  .bss           0x00000000        0x0 src\ext\tiny_printf.o
@@ -345,6 +333,7 @@ LOAD src\hal\mcu.o
 LOAD src\hal\gio.o
 LOAD src\hal\eic.o
 LOAD src\hal\dma.o
+LOAD src\hal\dac.o
 LOAD src\ext\tiny_printf.o
 LOAD src\asl\adm.o
 LOAD src\apl\main.o
@@ -372,7 +361,7 @@ LOAD b:/program files (x86)/atollic/truestudio for arm 5.4.0/armtools/bin/../lib
  .isr_vector    0x08000000      0x188 src\mal\ivtable.o
                 0x08000188                . = ALIGN (0x4)
 
-.text           0x08000188      0x740
+.text           0x08000188      0xae4
                 0x08000188                . = ALIGN (0x4)
  *(.text)
  .text          0x08000188       0x40 b:/program files (x86)/atollic/truestudio for arm 5.4.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
@@ -397,167 +386,215 @@ LOAD b:/program files (x86)/atollic/truestudio for arm 5.4.0/armtools/bin/../lib
                 0x08000344       0x50 src\hal\rcc.o
                 0x08000344                HAL::RCCM::getSystemClock()
  .text._ZN3HAL4RCCM10initClocksEv
-                0x08000394       0xf4 src\hal\rcc.o
+                0x08000394      0x100 src\hal\rcc.o
                 0x08000394                HAL::RCCM::initClocks()
  .text._ZN3HAL3MCU4initEv
-                0x08000488       0x78 src\hal\mcu.o
-                0x08000488                HAL::MCU::init()
+                0x08000494       0x78 src\hal\mcu.o
+                0x08000494                HAL::MCU::init()
  .text._ZN3HAL3MCU8getTicksEv
-                0x08000500       0x18 src\hal\mcu.o
-                0x08000500                HAL::MCU::getTicks()
+                0x0800050c       0x18 src\hal\mcu.o
+                0x0800050c                HAL::MCU::getTicks()
  .text._ZN3HAL3MCU10delayUntilEPFbvE
-                0x08000518       0x50 src\hal\mcu.o
-                0x08000518                HAL::MCU::delayUntil(bool (*)())
+                0x08000524       0x58 src\hal\mcu.o
+                0x08000524                HAL::MCU::delayUntil(bool (*)())
  .text._ZN3HAL3MCU10delayTicksEm
-                0x08000568       0x34 src\hal\mcu.o
-                0x08000568                HAL::MCU::delayTicks(unsigned long)
+                0x0800057c       0x38 src\hal\mcu.o
+                0x0800057c                HAL::MCU::delayTicks(unsigned long)
  .text.HAL_MCU_IncrementTicks
-                0x0800059c       0x3c src\hal\mcu.o
-                0x0800059c                HAL_MCU_IncrementTicks
+                0x080005b4       0x3c src\hal\mcu.o
+                0x080005b4                HAL_MCU_IncrementTicks
  .text.SystemInit
-                0x080005d8       0x54 src\hal\mcu.o
-                0x080005d8                SystemInit
+                0x080005f0       0x54 src\hal\mcu.o
+                0x080005f0                SystemInit
  .text._Z7set_bitRVmmm
-                0x0800062c       0x54 src\hal\gio.o
-                0x0800062c                set_bit(unsigned long volatile&, unsigned long, unsigned long)
+                0x08000644       0x54 src\hal\gio.o
+                0x08000644                set_bit(unsigned long volatile&, unsigned long, unsigned long)
  .text._Z8set_bit2RVmmm
-                0x08000680       0x50 src\hal\gio.o
-                0x08000680                set_bit2(unsigned long volatile&, unsigned long, unsigned long)
+                0x08000698       0x50 src\hal\gio.o
+                0x08000698                set_bit2(unsigned long volatile&, unsigned long, unsigned long)
  .text._ZN3HAL3GIO6toggleENS0_4PortEm
-                0x080006d0       0x48 src\hal\gio.o
-                0x080006d0                HAL::GIO::toggle(HAL::GIO::Port, unsigned long)
+                0x080006e8       0x48 src\hal\gio.o
+                0x080006e8                HAL::GIO::toggle(HAL::GIO::Port, unsigned long)
  .text._ZN3HAL3GIO12configurePinENS0_4PortEmNS0_4ModeENS0_7PullupsENS0_4TypeENS0_5SpeedEm
-                0x08000718       0x74 src\hal\gio.o
-                0x08000718                HAL::GIO::configurePin(HAL::GIO::Port, unsigned long, HAL::GIO::Mode, HAL::GIO::Pullups, HAL::GIO::Type, HAL::GIO::Speed, unsigned long)
+                0x08000730       0x74 src\hal\gio.o
+                0x08000730                HAL::GIO::configurePin(HAL::GIO::Port, unsigned long, HAL::GIO::Mode, HAL::GIO::Pullups, HAL::GIO::Type, HAL::GIO::Speed, unsigned long)
  .text.HAL_EIC_EXTI0_Handler
-                0x0800078c        0x8 src\hal\gio.o
-                0x0800078c                HAL_EIC_EXTI0_Handler
+                0x080007a4        0x8 src\hal\gio.o
+                0x080007a4                HAL_EIC_EXTI0_Handler
  .text._Z41__static_initialization_and_destruction_0ii
-                0x08000794       0x70 src\hal\gio.o
+                0x080007ac       0x70 src\hal\gio.o
  .text._GLOBAL__sub_I__Z7set_bitRVmmm
-                0x08000804       0x10 src\hal\gio.o
+                0x0800081c       0x10 src\hal\gio.o
  .text.HAL_EIC_DefaultInterruptHandler
-                0x08000814        0xc src\hal\eic.o
-                0x08000814                HAL_EIC_DefaultInterruptHandler
+                0x0800082c        0xc src\hal\eic.o
+                0x0800082c                HAL_EIC_DefaultInterruptHandler
  .text.HAL_EIC_NMI_Handler
-                0x08000820        0xc src\hal\eic.o
-                0x08000820                HAL_EIC_NMI_Handler
- .text.main     0x0800082c       0x38 src\apl\main.o
-                0x0800082c                main
+                0x08000838        0xc src\hal\eic.o
+                0x08000838                HAL_EIC_NMI_Handler
+ .text._ZN3HAL3DMA15configureSourceENS0_6SourceEPvPVv
+                0x08000844       0x30 src\hal\dma.o
+                0x08000844                HAL::DMA::configureSource(HAL::DMA::Source, void*, void volatile*)
+ .text._ZN3HAL3DMA12enableSourceENS0_6SourceEm
+                0x08000874       0x24 src\hal\dma.o
+                0x08000874                HAL::DMA::enableSource(HAL::DMA::Source, unsigned long)
+ .text._ZN3HAL3DMAL10configChanENS0_7ChannelEmPvPVv
+                0x08000898       0x44 src\hal\dma.o
+ .text._ZN3HAL3DMAL9startChanENS0_7ChannelEm
+                0x080008dc       0x4c src\hal\dma.o
+ .text._ZN3HAL3DMAL10isChanFreeENS0_7ChannelE
+                0x08000928       0x2c src\hal\dma.o
+ .text._ZN3HAL3DMAL22getSourceConfigurationENS0_6SourceE
+                0x08000954       0x54 src\hal\dma.o
+ .text._Z41__static_initialization_and_destruction_0ii
+                0x080009a8       0x50 src\hal\dma.o
+ .text._GLOBAL__sub_I__ZN3HAL3DMA15configureSourceENS0_6SourceEPv
+                0x080009f8       0x10 src\hal\dma.o
+ .text._ZN3HAL3DAC9configureENS0_7TriggerEbb
+                0x08000a08       0xa8 src\hal\dac.o
+                0x08000a08                HAL::DAC::configure(HAL::DAC::Trigger, bool, bool)
+ .text._ZN3HAL3DAC6SINGLE6enableEv
+                0x08000ab0       0x1c src\hal\dac.o
+                0x08000ab0                HAL::DAC::SINGLE::enable()
+ .text._ZN3HAL3DAC6SINGLE7setDataEt
+                0x08000acc       0x58 src\hal\dac.o
+                0x08000acc                HAL::DAC::SINGLE::setData(unsigned short)
+ .text._ZN3HAL3DAC6SINGLE8startDMAEPtt
+                0x08000b24       0x64 src\hal\dac.o
+                0x08000b24                HAL::DAC::SINGLE::startDMA(unsigned short*, unsigned short)
+ .text._ZN3HAL3DAC6SINGLE9swTriggerEv
+                0x08000b88       0x1c src\hal\dac.o
+                0x08000b88                HAL::DAC::SINGLE::swTrigger()
+ .text.main     0x08000ba4       0x64 src\apl\main.o
+                0x08000ba4                main
  .text.__libc_init_array
-                0x08000864       0x4c b:/program files (x86)/atollic/truestudio for arm 5.4.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_s.a(lib_a-init.o)
-                0x08000864                __libc_init_array
+                0x08000c08       0x4c b:/program files (x86)/atollic/truestudio for arm 5.4.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_s.a(lib_a-init.o)
+                0x08000c08                __libc_init_array
  *(.glue_7)
  .glue_7        0x00000000        0x0 linker stubs
  *(.glue_7t)
  .glue_7t       0x00000000        0x0 linker stubs
  *(.eh_frame)
- .eh_frame      0x080008b0        0x0 b:/program files (x86)/atollic/truestudio for arm 5.4.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
+ .eh_frame      0x08000c54        0x0 b:/program files (x86)/atollic/truestudio for arm 5.4.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
  *(.init)
- .init          0x080008b0        0x4 b:/program files (x86)/atollic/truestudio for arm 5.4.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crti.o
-                0x080008b0                _init
- .init          0x080008b4        0x8 b:/program files (x86)/atollic/truestudio for arm 5.4.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtn.o
+ .init          0x08000c54        0x4 b:/program files (x86)/atollic/truestudio for arm 5.4.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crti.o
+                0x08000c54                _init
+ .init          0x08000c58        0x8 b:/program files (x86)/atollic/truestudio for arm 5.4.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtn.o
  *(.fini)
- .fini          0x080008bc        0x4 b:/program files (x86)/atollic/truestudio for arm 5.4.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crti.o
-                0x080008bc                _fini
- .fini          0x080008c0        0x8 b:/program files (x86)/atollic/truestudio for arm 5.4.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtn.o
-                0x080008c8                . = ALIGN (0x4)
-                0x080008c8                _etext = .
+ .fini          0x08000c60        0x4 b:/program files (x86)/atollic/truestudio for arm 5.4.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crti.o
+                0x08000c60                _fini
+ .fini          0x08000c64        0x8 b:/program files (x86)/atollic/truestudio for arm 5.4.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtn.o
+                0x08000c6c                . = ALIGN (0x4)
+                0x08000c6c                _etext = .
 
-.vfp11_veneer   0x080008c8        0x0
+.vfp11_veneer   0x08000c6c        0x0
  .vfp11_veneer  0x00000000        0x0 linker stubs
 
-.v4_bx          0x080008c8        0x0
+.v4_bx          0x08000c6c        0x0
  .v4_bx         0x00000000        0x0 linker stubs
 
-.iplt           0x080008c8        0x0
+.iplt           0x08000c6c        0x0
  .iplt          0x00000000        0x0 b:/program files (x86)/atollic/truestudio for arm 5.4.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
 
-.rodata         0x080008c8       0x2c
-                0x080008c8                . = ALIGN (0x4)
+.rodata         0x08000c6c       0x30
+                0x08000c6c                . = ALIGN (0x4)
  *(.rodata)
  *(.rodata*)
  .rodata._ZN3MAL3CM47SYSTICKE
-                0x080008c8        0x4 src\mal\stm32f303vc.o
-                0x080008c8                MAL::CM4::SYSTICK
+                0x08000c6c        0x4 src\mal\stm32f303vc.o
+                0x08000c6c                MAL::CM4::SYSTICK
  .rodata._ZN3MAL3CM43SCBE
-                0x080008cc        0x4 src\mal\stm32f303vc.o
-                0x080008cc                MAL::CM4::SCB
+                0x08000c70        0x4 src\mal\stm32f303vc.o
+                0x08000c70                MAL::CM4::SCB
  .rodata._ZN3MAL3CM47SCB_CPAE
-                0x080008d0        0x4 src\mal\stm32f303vc.o
-                0x080008d0                MAL::CM4::SCB_CPA
+                0x08000c74        0x4 src\mal\stm32f303vc.o
+                0x08000c74                MAL::CM4::SCB_CPA
  .rodata._ZN3MAL3F3C10GPIO_PORTAE
-                0x080008d4        0x4 src\mal\stm32f303vc.o
-                0x080008d4                MAL::F3C::GPIO_PORTA
+                0x08000c78        0x4 src\mal\stm32f303vc.o
+                0x08000c78                MAL::F3C::GPIO_PORTA
  .rodata._ZN3MAL3F3C10GPIO_PORTBE
-                0x080008d8        0x4 src\mal\stm32f303vc.o
-                0x080008d8                MAL::F3C::GPIO_PORTB
+                0x08000c7c        0x4 src\mal\stm32f303vc.o
+                0x08000c7c                MAL::F3C::GPIO_PORTB
  .rodata._ZN3MAL3F3C10GPIO_PORTCE
-                0x080008dc        0x4 src\mal\stm32f303vc.o
-                0x080008dc                MAL::F3C::GPIO_PORTC
+                0x08000c80        0x4 src\mal\stm32f303vc.o
+                0x08000c80                MAL::F3C::GPIO_PORTC
  .rodata._ZN3MAL3F3C10GPIO_PORTDE
-                0x080008e0        0x4 src\mal\stm32f303vc.o
-                0x080008e0                MAL::F3C::GPIO_PORTD
+                0x08000c84        0x4 src\mal\stm32f303vc.o
+                0x08000c84                MAL::F3C::GPIO_PORTD
  .rodata._ZN3MAL3F3C10GPIO_PORTEE
-                0x080008e4        0x4 src\mal\stm32f303vc.o
-                0x080008e4                MAL::F3C::GPIO_PORTE
+                0x08000c88        0x4 src\mal\stm32f303vc.o
+                0x08000c88                MAL::F3C::GPIO_PORTE
  .rodata._ZN3MAL3F3C10GPIO_PORTFE
-                0x080008e8        0x4 src\mal\stm32f303vc.o
-                0x080008e8                MAL::F3C::GPIO_PORTF
+                0x08000c8c        0x4 src\mal\stm32f303vc.o
+                0x08000c8c                MAL::F3C::GPIO_PORTF
  .rodata._ZN3MAL3F3C6RCCMODE
-                0x080008ec        0x4 src\mal\stm32f303vc.o
-                0x080008ec                MAL::F3C::RCCMOD
+                0x08000c90        0x4 src\mal\stm32f303vc.o
+                0x08000c90                MAL::F3C::RCCMOD
  .rodata._ZN3MAL3F3C5FLASHE
-                0x080008f0        0x4 src\mal\stm32f303vc.o
-                0x080008f0                MAL::F3C::FLASH
-                0x080008f4                . = ALIGN (0x4)
+                0x08000c94        0x4 src\mal\stm32f303vc.o
+                0x08000c94                MAL::F3C::FLASH
+ .rodata._ZN3MAL3F3C3DACE
+                0x08000c98        0x4 src\mal\stm32f303vc.o
+                0x08000c98                MAL::F3C::DAC
+                0x08000c9c                . = ALIGN (0x4)
 
-.rel.dyn        0x080008f4        0x0
+.rel.dyn        0x08000c9c        0x0
  .rel.iplt      0x00000000        0x0 b:/program files (x86)/atollic/truestudio for arm 5.4.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM            0x080008f4        0x0
-                0x080008f4                __exidx_start = .
+.ARM            0x08000c9c        0x0
+                0x08000c9c                __exidx_start = .
  *(.ARM.exidx*)
-                0x080008f4                __exidx_end = .
+                0x08000c9c                __exidx_end = .
 
-.preinit_array  0x080008f4        0x0
-                0x080008f4                PROVIDE (__preinit_array_start, .)
+.preinit_array  0x08000c9c        0x0
+                0x08000c9c                PROVIDE (__preinit_array_start, .)
  *(.preinit_array*)
-                0x080008f4                PROVIDE (__preinit_array_end, .)
+                0x08000c9c                PROVIDE (__preinit_array_end, .)
 
-.init_array     0x080008f4        0xc
-                0x080008f4                PROVIDE (__init_array_start, .)
+.init_array     0x08000c9c       0x10
+                0x08000c9c                PROVIDE (__init_array_start, .)
  *(SORT(.init_array.*))
  *(.init_array*)
- .init_array    0x080008f4        0x4 b:/program files (x86)/atollic/truestudio for arm 5.4.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
- .init_array    0x080008f8        0x4 src\mal\stm32f303vc.o
- .init_array    0x080008fc        0x4 src\hal\gio.o
-                0x08000900                PROVIDE (__init_array_end, .)
+ .init_array    0x08000c9c        0x4 b:/program files (x86)/atollic/truestudio for arm 5.4.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
+ .init_array    0x08000ca0        0x4 src\mal\stm32f303vc.o
+ .init_array    0x08000ca4        0x4 src\hal\gio.o
+ .init_array    0x08000ca8        0x4 src\hal\dma.o
+                0x08000cac                PROVIDE (__init_array_end, .)
 
-.fini_array     0x08000900        0x4
-                0x08000900                PROVIDE (__fini_array_start, .)
+.fini_array     0x08000cac        0x4
+                0x08000cac                PROVIDE (__fini_array_start, .)
  *(SORT(.fini_array.*))
  *(.fini_array*)
- .fini_array    0x08000900        0x4 b:/program files (x86)/atollic/truestudio for arm 5.4.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
-                0x08000904                PROVIDE (__fini_array_end, .)
-                0x08000904                _sidata = LOADADDR (.data)
+ .fini_array    0x08000cac        0x4 b:/program files (x86)/atollic/truestudio for arm 5.4.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
+                0x08000cb0                PROVIDE (__fini_array_end, .)
+                0x08000cb0                _sidata = LOADADDR (.data)
 
-.data           0x20000000        0x0 load address 0x08000904
+.data           0x20000000       0xc8 load address 0x08000cb0
                 0x20000000                . = ALIGN (0x4)
                 0x20000000                _sdata = .
  *(.data)
  *(.data*)
-                0x20000000                . = ALIGN (0x4)
-                0x20000000                _edata = .
-                0x08000904                _siccmram = LOADADDR (.ccmram)
+ .data._ZN3HAL3DMAL6configE
+                0x20000000       0xa0 src\hal\dma.o
+ .data._ZN3HAL3DMAL22memToMemConfigControl8E
+                0x200000a0        0x4 src\hal\dma.o
+ .data._ZN3HAL3DMAL23memToMemConfigControl32E
+                0x200000a4        0x4 src\hal\dma.o
+ .data._ZN3HAL3DMAL16dacConfigControlE
+                0x200000a8        0x4 src\hal\dma.o
+ .data.dacValues
+                0x200000ac       0x1c src\apl\main.o
+                0x200000ac                dacValues
+                0x200000c8                . = ALIGN (0x4)
+                0x200000c8                _edata = .
+                0x08000d78                _siccmram = LOADADDR (.ccmram)
 
-.igot.plt       0x20000000        0x0 load address 0x08000904
+.igot.plt       0x200000c8        0x0 load address 0x08000d78
  .igot.plt      0x00000000        0x0 b:/program files (x86)/atollic/truestudio for arm 5.4.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
 
-.ccmram         0x10000000        0x0 load address 0x08000904
+.ccmram         0x10000000        0x0 load address 0x08000d78
                 0x10000000                . = ALIGN (0x4)
                 0x10000000                _sccmram = .
  *(.ccmram)
@@ -566,33 +603,44 @@ LOAD b:/program files (x86)/atollic/truestudio for arm 5.4.0/armtools/bin/../lib
                 0x10000000                _eccmram = .
                 0x10000000                . = ALIGN (0x4)
 
-.bss            0x20000000       0x68
-                0x20000000                _sbss = .
-                0x20000000                __bss_start__ = _sbss
+.bss            0x200000c8       0x74
+                0x200000c8                _sbss = .
+                0x200000c8                __bss_start__ = _sbss
  *(.bss)
- .bss           0x20000000       0x1c b:/program files (x86)/atollic/truestudio for arm 5.4.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
+ .bss           0x200000c8       0x1c b:/program files (x86)/atollic/truestudio for arm 5.4.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
  *(.bss*)
  .bss._ZN3MAL3F3C12DMA_CHANNELSE
-                0x2000001c       0x30 src\mal\stm32f303vc.o
-                0x2000001c                MAL::F3C::DMA_CHANNELS
+                0x200000e4       0x30 src\mal\stm32f303vc.o
+                0x200000e4                MAL::F3C::DMA_CHANNELS
  .bss._ZL13systemTicksMs
-                0x2000004c        0x4 src\hal\mcu.o
+                0x20000114        0x4 src\hal\mcu.o
  .bss._ZL7g_ports
-                0x20000050       0x18 src\hal\gio.o
+                0x20000118       0x18 src\hal\gio.o
+ .bss._ZN3HAL3DACL10inDualModeE
+                0x20000130        0x1 src\hal\dac.o
+ *fill*         0x20000131        0x3 
+ .bss._ZN3HAL3DACL7triggerE
+                0x20000134        0x4 src\hal\dac.o
+ .bss._ZN3HAL3DACL8usingDMAE
+                0x20000138        0x1 src\hal\dac.o
+ .bss._ZN3HAL3DACL6bits12E
+                0x20000139        0x1 src\hal\dac.o
+ .bss._ZN3HAL3DACL11bitModeMaskE
+                0x2000013a        0x2 src\hal\dac.o
  *(COMMON)
-                0x20000068                . = ALIGN (0x4)
-                0x20000068                _ebss = .
-                0x20000068                __bss_end__ = _ebss
+                0x2000013c                . = ALIGN (0x4)
+                0x2000013c                _ebss = .
+                0x2000013c                __bss_end__ = _ebss
 
 ._user_heap_stack
-                0x20000068      0x200
-                0x20000068                . = ALIGN (0x4)
-                0x20000068                PROVIDE (end, .)
-                0x20000068                PROVIDE (_end, .)
-                0x20000068                . = (. + _Min_Heap_Size)
-                0x20000268                . = (. + _Min_Stack_Size)
- *fill*         0x20000068      0x200 
-                0x20000268                . = ALIGN (0x4)
+                0x2000013c      0x200
+                0x2000013c                . = ALIGN (0x4)
+                0x2000013c                PROVIDE (end, .)
+                0x2000013c                PROVIDE (_end, .)
+                0x2000013c                . = (. + _Min_Heap_Size)
+                0x2000033c                . = (. + _Min_Stack_Size)
+ *fill*         0x2000013c      0x200 
+                0x2000033c                . = ALIGN (0x4)
 
 .memory_b1_text
  *(.mb1text)
@@ -627,32 +675,40 @@ LOAD b:/program files (x86)/atollic/truestudio for arm 5.4.0/armtools/bin/../lib
  .ARM.attributes
                 0x00000180       0x39 src\hal\eic.o
  .ARM.attributes
-                0x000001b9       0x39 src\apl\main.o
+                0x000001b9       0x39 src\hal\dma.o
  .ARM.attributes
-                0x000001f2       0x34 b:/program files (x86)/atollic/truestudio for arm 5.4.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_s.a(lib_a-init.o)
+                0x000001f2       0x39 src\hal\dac.o
  .ARM.attributes
-                0x00000226       0x22 b:/program files (x86)/atollic/truestudio for arm 5.4.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtn.o
+                0x0000022b       0x39 src\apl\main.o
+ .ARM.attributes
+                0x00000264       0x34 b:/program files (x86)/atollic/truestudio for arm 5.4.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_s.a(lib_a-init.o)
+ .ARM.attributes
+                0x00000298       0x22 b:/program files (x86)/atollic/truestudio for arm 5.4.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtn.o
 OUTPUT(HAB3.elf elf32-littlearm)
 
-.debug_info     0x00000000     0x5056
- .debug_info    0x00000000     0x25ce src\mal\stm32f303vc.o
- .debug_info    0x000025ce       0x70 src\mal\startup.o
- .debug_info    0x0000263e     0x10f1 src\hal\rcc.o
- .debug_info    0x0000372f     0x1008 src\hal\mcu.o
- .debug_info    0x00004737      0x71b src\hal\gio.o
- .debug_info    0x00004e52       0xbf src\hal\eic.o
- .debug_info    0x00004f11      0x145 src\apl\main.o
+.debug_info     0x00000000     0x660e
+ .debug_info    0x00000000     0x2b0e src\mal\stm32f303vc.o
+ .debug_info    0x00002b0e       0x70 src\mal\startup.o
+ .debug_info    0x00002b7e     0x10f1 src\hal\rcc.o
+ .debug_info    0x00003c6f     0x1008 src\hal\mcu.o
+ .debug_info    0x00004c77      0x71b src\hal\gio.o
+ .debug_info    0x00005392       0xbf src\hal\eic.o
+ .debug_info    0x00005451      0x74b src\hal\dma.o
+ .debug_info    0x00005b9c      0x8c8 src\hal\dac.o
+ .debug_info    0x00006464      0x1aa src\apl\main.o
 
-.debug_abbrev   0x00000000      0x8fe
- .debug_abbrev  0x00000000      0x20d src\mal\stm32f303vc.o
- .debug_abbrev  0x0000020d       0x12 src\mal\startup.o
- .debug_abbrev  0x0000021f      0x18b src\hal\rcc.o
- .debug_abbrev  0x000003aa      0x2a3 src\hal\mcu.o
- .debug_abbrev  0x0000064d      0x1f9 src\hal\gio.o
- .debug_abbrev  0x00000846       0x2a src\hal\eic.o
- .debug_abbrev  0x00000870       0x8e src\apl\main.o
+.debug_abbrev   0x00000000      0xd71
+ .debug_abbrev  0x00000000      0x222 src\mal\stm32f303vc.o
+ .debug_abbrev  0x00000222       0x12 src\mal\startup.o
+ .debug_abbrev  0x00000234      0x18b src\hal\rcc.o
+ .debug_abbrev  0x000003bf      0x2a3 src\hal\mcu.o
+ .debug_abbrev  0x00000662      0x1f9 src\hal\gio.o
+ .debug_abbrev  0x0000085b       0x2a src\hal\eic.o
+ .debug_abbrev  0x00000885      0x25c src\hal\dma.o
+ .debug_abbrev  0x00000ae1      0x1d2 src\hal\dac.o
+ .debug_abbrev  0x00000cb3       0xbe src\apl\main.o
 
-.debug_aranges  0x00000000      0x1f8
+.debug_aranges  0x00000000      0x2c0
  .debug_aranges
                 0x00000000       0x28 src\mal\stm32f303vc.o
  .debug_aranges
@@ -666,39 +722,51 @@ OUTPUT(HAB3.elf elf32-littlearm)
  .debug_aranges
                 0x00000178       0x60 src\hal\eic.o
  .debug_aranges
-                0x000001d8       0x20 src\apl\main.o
+                0x000001d8       0x68 src\hal\dma.o
+ .debug_aranges
+                0x00000240       0x60 src\hal\dac.o
+ .debug_aranges
+                0x000002a0       0x20 src\apl\main.o
 
-.debug_ranges   0x00000000      0x190
+.debug_ranges   0x00000000      0x238
  .debug_ranges  0x00000000       0x18 src\mal\stm32f303vc.o
  .debug_ranges  0x00000018       0x20 src\mal\startup.o
  .debug_ranges  0x00000038       0x38 src\hal\rcc.o
  .debug_ranges  0x00000070       0x50 src\hal\mcu.o
  .debug_ranges  0x000000c0       0x70 src\hal\gio.o
  .debug_ranges  0x00000130       0x50 src\hal\eic.o
- .debug_ranges  0x00000180       0x10 src\apl\main.o
+ .debug_ranges  0x00000180       0x58 src\hal\dma.o
+ .debug_ranges  0x000001d8       0x50 src\hal\dac.o
+ .debug_ranges  0x00000228       0x10 src\apl\main.o
 
-.debug_line     0x00000000      0xb89
+.debug_line     0x00000000     0x1157
  .debug_line    0x00000000      0x192 src\mal\stm32f303vc.o
  .debug_line    0x00000192       0x74 src\mal\startup.o
- .debug_line    0x00000206      0x232 src\hal\rcc.o
- .debug_line    0x00000438      0x289 src\hal\mcu.o
- .debug_line    0x000006c1      0x344 src\hal\gio.o
- .debug_line    0x00000a05       0xd3 src\hal\eic.o
- .debug_line    0x00000ad8       0xb1 src\apl\main.o
+ .debug_line    0x00000206      0x233 src\hal\rcc.o
+ .debug_line    0x00000439      0x289 src\hal\mcu.o
+ .debug_line    0x000006c2      0x344 src\hal\gio.o
+ .debug_line    0x00000a06       0xd3 src\hal\eic.o
+ .debug_line    0x00000ad9      0x289 src\hal\dma.o
+ .debug_line    0x00000d62      0x25e src\hal\dac.o
+ .debug_line    0x00000fc0      0x197 src\apl\main.o
 
-.debug_str      0x00000000     0x16fa
- .debug_str     0x00000000     0x1125 src\mal\stm32f303vc.o
-                               0x124c (size before relaxing)
- .debug_str     0x00001125       0xe1 src\hal\rcc.o
+.debug_str      0x00000000     0x1bee
+ .debug_str     0x00000000     0x1239 src\mal\stm32f303vc.o
+                               0x136a (size before relaxing)
+ .debug_str     0x00001239       0xe1 src\hal\rcc.o
                                 0x8db (size before relaxing)
- .debug_str     0x00001206      0x1ea src\hal\mcu.o
+ .debug_str     0x0000131a      0x1e5 src\hal\mcu.o
                                 0x8e4 (size before relaxing)
- .debug_str     0x000013f0      0x1fe src\hal\gio.o
+ .debug_str     0x000014ff      0x1fe src\hal\gio.o
                                 0x5f5 (size before relaxing)
- .debug_str     0x000015ee       0xf3 src\hal\eic.o
+ .debug_str     0x000016fd       0xf3 src\hal\eic.o
                                 0x225 (size before relaxing)
- .debug_str     0x000016e1       0x19 src\apl\main.o
-                                0x26a (size before relaxing)
+ .debug_str     0x000017f0      0x201 src\hal\dma.o
+                                0x545 (size before relaxing)
+ .debug_str     0x000019f1      0x1da src\hal\dac.o
+                                0x558 (size before relaxing)
+ .debug_str     0x00001bcb       0x23 src\apl\main.o
+                                0x2b2 (size before relaxing)
 
 .comment        0x00000000       0x82
  .comment       0x00000000       0x82 src\mal\stm32f303vc.o
@@ -707,16 +775,20 @@ OUTPUT(HAB3.elf elf32-littlearm)
  .comment       0x00000000       0x83 src\hal\mcu.o
  .comment       0x00000000       0x83 src\hal\gio.o
  .comment       0x00000000       0x83 src\hal\eic.o
+ .comment       0x00000000       0x83 src\hal\dma.o
+ .comment       0x00000000       0x83 src\hal\dac.o
  .comment       0x00000000       0x83 src\apl\main.o
 
-.debug_frame    0x00000000      0x4d0
+.debug_frame    0x00000000      0x70c
  .debug_frame   0x00000000       0x48 src\mal\stm32f303vc.o
  .debug_frame   0x00000048       0xac src\hal\rcc.o
  .debug_frame   0x000000f4      0x10c src\hal\mcu.o
  .debug_frame   0x00000200      0x18c src\hal\gio.o
  .debug_frame   0x0000038c       0xe8 src\hal\eic.o
- .debug_frame   0x00000474       0x30 src\apl\main.o
- .debug_frame   0x000004a4       0x2c b:/program files (x86)/atollic/truestudio for arm 5.4.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_s.a(lib_a-init.o)
+ .debug_frame   0x00000474      0x13c src\hal\dma.o
+ .debug_frame   0x000005b0      0x100 src\hal\dac.o
+ .debug_frame   0x000006b0       0x30 src\apl\main.o
+ .debug_frame   0x000006e0       0x2c b:/program files (x86)/atollic/truestudio for arm 5.4.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_s.a(lib_a-init.o)
 
 Cross Reference Table
 
@@ -735,8 +807,26 @@ ASL::ADM::getChannelRef(unsigned long, unsigned long) src\asl\adm.o
 ASL::ADM::setSample(ASL::ADM::Channel&, unsigned long) src\asl\adm.o
 Default_Handler                                   src\mal\startup.o
                                                   src\mal\ivtable.o
-HAL::DMA::startM2M(void*, void*, unsigned long)   src\hal\dma.o
-HAL::DMA::startM2M_32(void*, void*, unsigned long) src\hal\dma.o
+HAL::DAC::DUAL::activateDMA()                     src\hal\dac.o
+HAL::DAC::DUAL::enable(bool)                      src\hal\dac.o
+HAL::DAC::DUAL::setData(unsigned long)            src\hal\dac.o
+HAL::DAC::SINGLE::disable()                       src\hal\dac.o
+HAL::DAC::SINGLE::enable()                        src\hal\dac.o
+                                                  src\apl\main.o
+HAL::DAC::SINGLE::setData(unsigned short)         src\hal\dac.o
+                                                  src\apl\main.o
+HAL::DAC::SINGLE::startDMA(unsigned short*, unsigned short) src\hal\dac.o
+                                                  src\apl\main.o
+HAL::DAC::SINGLE::swTrigger()                     src\hal\dac.o
+                                                  src\apl\main.o
+HAL::DAC::configure(HAL::DAC::Trigger, bool, bool) src\hal\dac.o
+                                                  src\apl\main.o
+HAL::DMA::configureSource(HAL::DMA::Source, void*) src\hal\dma.o
+HAL::DMA::configureSource(HAL::DMA::Source, void*, void volatile*) src\hal\dma.o
+                                                  src\hal\dac.o
+HAL::DMA::enableSource(HAL::DMA::Source, unsigned long) src\hal\dma.o
+                                                  src\hal\dac.o
+HAL::DMA::startM2M(HAL::DMA::Source, void*, void*, unsigned long) src\hal\dma.o
 HAL::GIO::configurePin(HAL::GIO::Port, unsigned long, HAL::GIO::Defaults, unsigned long) src\hal\gio.o
 HAL::GIO::configurePin(HAL::GIO::Port, unsigned long, HAL::GIO::Mode, HAL::GIO::Pullups, HAL::GIO::Type, HAL::GIO::Speed, unsigned long) src\hal\gio.o
                                                   src\apl\main.o
@@ -784,6 +874,8 @@ MAL::CM4::SCB_CPA                                 src\mal\stm32f303vc.o
 MAL::CM4::SCB_FPU                                 src\mal\stm32f303vc.o
 MAL::CM4::SYSTICK                                 src\mal\stm32f303vc.o
                                                   src\hal\mcu.o
+MAL::F3C::DAC                                     src\mal\stm32f303vc.o
+                                                  src\hal\dac.o
 MAL::F3C::DMA1                                    src\mal\stm32f303vc.o
 MAL::F3C::DMA1_CH1                                src\mal\stm32f303vc.o
 MAL::F3C::DMA1_CH2                                src\mal\stm32f303vc.o
@@ -877,6 +969,7 @@ _wait                                             b:/program files (x86)/atollic
 _write                                            b:/program files (x86)/atollic/truestudio for arm 5.4.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_s.a(lib_a-syscalls.o)
                                                   src\ext\tiny_printf.o
 cleanup_glue                                      b:/program files (x86)/atollic/truestudio for arm 5.4.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_s.a(lib_a-reent.o)
+dacValues                                         src\apl\main.o
 end                                               b:/program files (x86)/atollic/truestudio for arm 5.4.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_s.a(lib_a-syscalls.o)
 environ                                           b:/program files (x86)/atollic/truestudio for arm 5.4.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_s.a(lib_a-syscalls.o)
 errno                                             b:/program files (x86)/atollic/truestudio for arm 5.4.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_s.a(lib_a-sbrkr.o)

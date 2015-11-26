@@ -793,5 +793,125 @@ struct FLASH_t
 
 extern volatile FLASH_t& FLASH;
 
+/* Digital to Analog Converter
+ * Created: 25/11/2015 James Telfer
+ */
+
+struct DAC_t
+{
+	REGISTER
+			v32t EN1 :1;
+			v32t BOFF_OUTEN1 :1;
+			v32t TEN1 :1;
+			v32t TSEL1 :3;
+			v32t WAVE1 :2;
+			v32t MAMP1 :4;
+			v32t DMA_EN1 :1;
+			v32t DMAU_DRIE1 :1;
+			v32t :2;
+			v32t EN2 :1;
+			v32t BOFF_OUTEN2 :1;
+			v32t TEN2 :1;
+			v32t TSEL2 :3;
+			v32t WAVE2 :2;
+			v32t MAMP2 :4;
+			v32t DMA_EN2 :1;
+			v32t DMAU_DRIE2 :1;
+			v32t :2;
+		NAMED
+	CR;
+
+	REGISTER
+			v32t SWTRIG1 :1;
+			v32t SWTRIG2 :1;
+			v32t :30;
+		NAMED
+	SWTRIGR;
+
+	REGISTER
+			v32t DACC1DHR :12;
+			v32t :20;
+		NAMED
+	DHR12R1;
+
+	REGISTER
+			v32t :4;
+			v32t DACC1DHR :12;
+			v32t :16;
+		NAMED
+	DHR12L1;
+
+	REGISTER
+			v32t DACC1DHR :8;
+			v32t :24;
+		NAMED
+	DHR8R1;
+
+	REGISTER
+			v32t DACC2DHR :12;
+			v32t :20;
+		NAMED
+	DHR12R2;
+
+	REGISTER
+			v32t :4;
+			v32t DACC2DHR :12;
+			v32t :16;
+		NAMED
+	DHR12L2;
+
+	REGISTER
+			v32t DACC2DHR :8;
+			v32t :24;
+		NAMED
+	DHR8R2;
+
+	REGISTER
+			v32t DACC1DHR :12;
+			v32t :4;
+			v32t DACC2DHR :12;
+			v32t :4;
+		NAMED
+	DHR12RD;
+
+	REGISTER
+			v32t :4;
+			v32t DACC1DHR :12;
+			v32t :4;
+			v32t DACC2DHR :12;
+		NAMED
+	DHR12LD;
+
+	REGISTER
+			v32t DACC1DHR :8;
+			v32t DACC2DHR :8;
+			v32t :16;
+		NAMED
+	DHR8RD;
+
+	REGISTER
+			v32t DACC1DOR :12;
+			v32t :20;
+		NAMED
+	DOR1;
+
+	REGISTER
+			v32t DACC2DOR :12;
+			v32t :20;
+		NAMED
+	DOR2;
+
+	REGISTER
+			v32t :13;
+			v32t DMAUDR1 :1;
+			v32t :15;
+			v32t DMAUDR2 :1;
+			v32t :2;
+		NAMED
+	SR;
+};
+
+extern volatile DAC_t& DAC;
+
 }
 }

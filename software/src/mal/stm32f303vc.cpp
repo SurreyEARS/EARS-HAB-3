@@ -53,5 +53,7 @@ volatile DMA_CHANNEL_t& DMA2_CH5 = *((DMA_CHANNEL_t*)(DMA2_BASE_ADDR + 0x58));
 volatile RCC_BASE_t& RCCMOD = *((RCC_BASE_t*)0x40021000);
 
 volatile FLASH_t& FLASH = *((FLASH_t*)0x40022000);
+
+volatile DAC_t& DAC = *((DAC_t*)0x40007400);
 }
 }

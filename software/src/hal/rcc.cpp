@@ -130,6 +130,8 @@ bool initClocks(void)
 	MRCC.AHB_CLKEN.B.DMA1_EN = 1U;
 	MRCC.AHB_CLKEN.B.DMA2_EN = 1U;
 
+	MRCC.APB1_CLKEN.B.DAC1_EN = 1U;
+
 	return true;
 }
 }

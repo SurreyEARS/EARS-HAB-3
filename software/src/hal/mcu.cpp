@@ -19,7 +19,8 @@ static uint32_t systemTicksMs = 0;
 /* Cannot delay for more than this many ms.
  * If this is more than half the watchdog period,
  * everything will break. */
-static const uint32_t maxDelay = 100;
+//TODO revert this value to 10ms
+static const uint32_t maxDelay = 99999U;
 
 static const HAL::GIO::Port statusPinPort = HAL::GIO::Port::PORTE;
 static const uint32_t statusPin = 13U;
