@@ -7,15 +7,13 @@
 
 #pragma once
 
-#include <stdint.h>
+#include <mal/device_defines.hpp>
 
-typedef volatile uint32_t v32t;
-typedef volatile uint16_t v16t;
-typedef volatile uint8_t v8t;
-
-#define REGISTER union { struct {
-#define NAMED } B; v32t R; }
-#define NAMED_16 } B; v16t R; }
+#include <mal/device_usb.hpp>
+#include <mal/device_timers.hpp>
+#include <mal/device_dma.hpp>
+#include <mal/device_rcc.hpp>
+#include <mal/device_usart.hpp>
 
 namespace MAL
 {
@@ -332,394 +330,39 @@ extern volatile GPIO_PORT_t& GPIO_PORTE;
 extern volatile GPIO_PORT_t& GPIO_PORTF;
 extern volatile GPIO_PORT_t& GPIO_PORTH;
 
-/* Direct Memory Access
- * Created: 21/11/2015 James Telfer
- */
-struct DMA_BASE_t
-{
-	REGISTER
-			v32t GIF1 :1;
-			v32t TCIF1 :1;
-			v32t HTIF1 :1;
-			v32t TEIF1 :1;
-			v32t GIF2 :1;
-			v32t TCIF2 :1;
-			v32t HTIF2 :1;
-			v32t TEIF2 :1;
-			v32t GIF3 :1;
-			v32t TCIF3 :1;
-			v32t HTIF3 :1;
-			v32t TEIF3 :1;
-			v32t GIF4 :1;
-			v32t TCIF4 :1;
-			v32t HTIF4 :1;
-			v32t TEIF4 :1;
-			v32t GIF5 :1;
-			v32t TCIF5 :1;
-			v32t HTIF5 :1;
-			v32t TEIF5 :1;
-			v32t GIF6 :1;
-			v32t TCIF6 :1;
-			v32t HTIF6 :1;
-			v32t TEIF6 :1;
-			v32t GIF7 :1;
-			v32t TCIF7 :1;
-			v32t HTIF7 :1;
-			v32t TEIF7 :1;
-			v32t :4;
-		NAMED
-	ISR;
-
-	REGISTER
-			v32t CGIF1 :1;
-			v32t CTCIF1 :1;
-			v32t CHTIF1 :1;
-			v32t CTEIF1 :1;
-			v32t CGIF2 :1;
-			v32t CTCIF2 :1;
-			v32t CHTIF2 :1;
-			v32t CTEIF2 :1;
-			v32t CGIF3 :1;
-			v32t CTCIF3 :1;
-			v32t CHTIF3 :1;
-			v32t CTEIF3 :1;
-			v32t CGIF4 :1;
-			v32t CTCIF4 :1;
-			v32t CHTIF4 :1;
-			v32t CTEIF4 :1;
-			v32t CGIF5 :1;
-			v32t CTCIF5 :1;
-			v32t CHTIF5 :1;
-			v32t CTEIF5 :1;
-			v32t CGIF6 :1;
-			v32t CTCIF6 :1;
-			v32t CHTIF6 :1;
-			v32t CTEIF6 :1;
-			v32t CGIF7 :1;
-			v32t CTCIF7 :1;
-			v32t CHTIF7 :1;
-			v32t CTEIF7 :1;
-			v32t :4;
-		NAMED
-	IFCR;
-};
-
-struct DMA_CHANNEL_t
-{
-	REGISTER
-			v32t EN :1;
-			v32t TCIE :1;
-			v32t HTIE :1;
-			v32t TEIE :1;
-			v32t DIR :1;
-			v32t CIRC :1;
-			v32t PINC :1;
-			v32t MINC :1;
-			v32t PSIZE :2;
-			v32t MSIZE :2;
-			v32t PL :2;
-			v32t MEM2MEM :1;
-			v32t :17;
-		NAMED
-	CCR;
-
-	REGISTER
-			v32t NDT :15;
-			v32t :15;
-		NAMED
-	CNDTR;
-
-	v32t CPAR;
-	v32t CMAR;
-};
-
-extern volatile DMA_CHANNEL_t* DMA_CHANNELS[12];
-
-extern volatile DMA_BASE_t& DMA1;
-extern volatile DMA_CHANNEL_t& DMA1_CH1;
-extern volatile DMA_CHANNEL_t& DMA1_CH2;
-extern volatile DMA_CHANNEL_t& DMA1_CH3;
-extern volatile DMA_CHANNEL_t& DMA1_CH4;
-extern volatile DMA_CHANNEL_t& DMA1_CH5;
-extern volatile DMA_CHANNEL_t& DMA1_CH6;
-extern volatile DMA_CHANNEL_t& DMA1_CH7;
-
-extern volatile DMA_BASE_t& DMA2;
-extern volatile DMA_CHANNEL_t& DMA2_CH1;
-extern volatile DMA_CHANNEL_t& DMA2_CH2;
-extern volatile DMA_CHANNEL_t& DMA2_CH3;
-extern volatile DMA_CHANNEL_t& DMA2_CH4;
-extern volatile DMA_CHANNEL_t& DMA2_CH5;
-
 /* Processor-side Interrupt Control
  * Created: 21/11/2015 James Telfer
  */
 
-/* Reset and Clock Configuration
- * Created: 21/11/2015 James Telfer
+/* Cyclic Redundancy Check Engine
+ * Created: 22/12/2015 James Telfer
  */
-struct RCC_BASE_t
+struct CRC_BASE_t
 {
+	v32t DR;
+
 	REGISTER
-			v32t HSION :1;
-			v32t HSIRDY :1;
-			v32t :1;
-			v32t HSITRIM :5; /* Can be set to adjust clock in 40kHz increments */
-			v32t HSICAL :8; /* Set automagically by startup */
-			v32t HSEON :1;
-			v32t HSERDY :1;
-			v32t HSEBYP :1;
-			v32t CSSON :1;
-			v32t :4;
-			v32t PLLON :1;
-			v32t PLLRDY :1;
-			v32t :6;
+			v32t IDR :8;
+			v32t :24;
+		NAMED
+	IDR;
+
+	REGISTER
+			v32t RESET :1;
+			v32t :2;
+			v32t POLYSIZE :2;
+			v32t REV_IN :2;
+			v32t REV_OUT :1;
+			v32t :24;
 		NAMED
 	CR;
 
-	REGISTER
-			v32t SW :2;
-			v32t SWS :2;
-			v32t HPRE :4;
-			v32t PPRE1 :3; /* Can be set to adjust clock in 40kHz increments */
-			v32t PPRE2 :3; /* Set automagically by startup */
-			v32t :1;
-			v32t :1; /* This bit is PLLSRC on 303xD/E chips only */
-			v32t PLLSRC :1;
-			v32t PLLXTPRE :1;
-			v32t PLLMUL :4;
-			v32t USBPRES :1;
-			v32t I2SSRC :1;
-			v32t MCO :3;
-			v32t :1;
-			v32t MCOPRE :3;
-			v32t PLLNODIV :1;
-		NAMED
-	CFGR;
-
-	REGISTER
-			v32t LSI_RDF :1;
-			v32t LSE_RDF :1;
-			v32t HSI_RDF :1;
-			v32t HSE_RDF :1;
-			v32t PLL_RDF :1;
-			v32t :2;
-			v32t CSSF :1;
-			v32t LSI_RDE :1;
-			v32t LSE_RDE :1;
-			v32t HSI_RDE :1;
-			v32t HSE_RDE :1;
-			v32t PLL_RDE :1;
-			v32t :3;
-			v32t LSI_RDC :1;
-			v32t LSE_RDC :1;
-			v32t HSI_RDC :1;
-			v32t HSE_RDC :1;
-			v32t PLL_RDC :1;
-			v32t :2;
-			v32t CSSC :1;
-			v32t :8;
-		NAMED
-	CIR;
-
-	REGISTER
-			v32t SYSCFG_RST :1;
-			v32t :10;
-			v32t USART1_RST :1;
-			v32t TIM8_RST :1;
-			v32t SPI1_RST :1;
-			v32t TIM1_RST :1;
-			v32t TIM15_RST :1;
-			v32t TIM16_RST :1;
-			v32t TIM17_RST :1;
-			v32t :13;
-		NAMED
-	APB2_RESET;
-
-	REGISTER
-			v32t TIM2_RST :1;
-			v32t TIM3_RST :1;
-			v32t TIM4_RST :1;
-			v32t :1;
-			v32t TIM6_RST :1;
-			v32t TIM7_RST :1;
-			v32t :5;
-			v32t WWDG_RST :1;
-			v32t :2;
-			v32t SPI2_RST :1;
-			v32t SPI3_RST :1;
-			v32t :1;
-			v32t USART2_RST :1;
-			v32t USART3_RST :1;
-			v32t USART4_RST :1;
-			v32t USART5_RST :1;
-			v32t I2C1_RST :1;
-			v32t I2C2_RST :1;
-			v32t USB_RST :1;
-			v32t :1;
-			v32t CAN_RST :1;
-			v32t DAC2_RST :1;
-			v32t :1;
-			v32t PWR_RST :1;
-			v32t DAC1_RST :1;
-			v32t :1; /* I2C3 on D/E devices */
-			v32t :1;
-		NAMED
-	APB1_RESET;
-
-	REGISTER
-			v32t DMA1_EN :1;
-			v32t DMA2_EN :1;
-			v32t SRAM_EN :1;
-			v32t :1;
-			v32t FLITF_EN :1;
-			v32t :1;
-			v32t CRC_EN :1;
-			v32t :9;
-			v32t :1; /* D/E IOPH */
-			v32t IOPA_EN :1;
-			v32t IOPB_EN :1;
-			v32t IOPC_EN :1;
-			v32t IOPD_EN :1;
-			v32t IOPE_EN :1;
-			v32t IOPF_EN :1;
-			v32t :1; /* D/E IOPG */
-			v32t TSC_EN :1;
-			v32t :3;
-			v32t ADC1_2_EN :1;
-			v32t ADC3_4_EN :1;
-			v32t :2;
-		NAMED
-	AHB_CLKEN;
-
-	REGISTER
-			v32t SYSCFG_EN :1;
-			v32t :10;
-			v32t TIM1_EN :1;
-			v32t SPI1_EN :1;
-			v32t TIM8_EN :1;
-			v32t USART1_EN :1;
-			v32t SPI4_EN :1;
-			v32t TIM15_EN :1;
-			v32t TIM16_EN :1;
-			v32t TIM17_EN :1;
-			v32t :1;
-			v32t TIM20_EN :1;
-			v32t :11;
-		NAMED
-	APB2_CLKEN;
-
-	REGISTER
-			v32t TIM2_EN :1;
-			v32t TIM3_EN :1;
-			v32t TIM4_EN :1;
-			v32t :1;
-			v32t TIM6_EN :1;
-			v32t TIM7_EN :1;
-			v32t :5;
-			v32t WWDG_EN :1;
-			v32t :2;
-			v32t SPI2_EN :1;
-			v32t SPI3_EN :1;
-			v32t :1;
-			v32t USART2_EN :1;
-			v32t USART3_EN :1;
-			v32t USART4_EN :1;
-			v32t USART5_EN :1;
-			v32t I2C1_EN :1;
-			v32t I2C2_EN :1;
-			v32t USB_EN :1;
-			v32t :1;
-			v32t CAN_EN :1;
-			v32t DAC2_EN :1;
-			v32t :1;
-			v32t PWR_EN :1;
-			v32t DAC1_EN :1;
-			v32t :1; /* I2C3 on D/E devices */
-			v32t :1;
-		NAMED
-	APB1_CLKEN;
-
-	REGISTER
-			v32t LSE_ON :1;
-			v32t LSE_RDY :1;
-			v32t LSE_BYP :1;
-			v32t LSE_DRV :2;
-			v32t :3;
-			v32t RTC_SEL :2;
-			v32t :5;
-			v32t RTC_EN :1;
-			v32t BD_RST :1;
-			v32t :15;
-		NAMED
-	BDCR;
-
-	REGISTER
-			v32t LSI_ON :1;
-			v32t LSI_RDY :1;
-			v32t :21;
-			v32t :1; /* D/E VREG_RSTF */
-			v32t RMVF :1;
-			v32t OBL_RSTF :1;
-			v32t PIN_RSTF :1;
-			v32t POR_RSTF :1;
-			v32t SFT_RSTF :1;
-			v32t IW_WDG_RSTF :1;
-			v32t WWDG_RSTF :1;
-			v32t LPWR_RSTF :1;
-		NAMED
-	CSR;
-
-	REGISTER
-			v32t :16;
-			v32t :1; /* D/E IOPH */
-			v32t IOPA_RST :1;
-			v32t IOPB_RST :1;
-			v32t IOPC_RST :1;
-			v32t IOPD_RST :1;
-			v32t IOPE_RST :1;
-			v32t IOPF_RST :1;
-			v32t :1; /* D/E IOPG */
-			v32t TSC_RST :1;
-			v32t :3;
-			v32t ADC1_2_RST :1;
-			v32t ADC3_4_RST :1;
-			v32t :2;
-		NAMED
-	AHB_RESET;
-
-	REGISTER
-			v32t PREDIV :4;
-			v32t ADC1_2PRES :5;
-			v32t ADC3_4PRES :5;
-			v32t :18;
-		NAMED
-	CFGR2;
-
-	REGISTER
-			v32t USART1_SW :2;
-			v32t :2;
-			v32t I2C1_SW :1;
-			v32t I2C2_SW :1;
-			v32t :1; /* D/E I2C3_SW */
-			v32t TIM1_SW :1;
-			v32t TIM8_SW :1;
-			v32t :2; /* D/E TIM15/16 */
-			v32t :1;
-			v32t :1; /* D/E TIM17 */
-			v32t :1;
-			v32t :1; /* D/E TIM20 */
-			v32t USART2_SW :2;
-			v32t USART3_SW :2;
-			v32t USART4_SW :2;
-			v32t USART5_SW :2;
-			v32t :2; /* D/E TIM2 and 34 */
-			v32t :6;
-		NAMED
-	CFGR3;
+	v32t :32;
+	v32t INIT;
+	v32t POL;
 };
 
-extern volatile RCC_BASE_t& RCCMOD;
+extern volatile CRC_BASE_t& CRC;
 
 /* Flash Memory Configuration
  * Created: 22/11/2015 James Telfer
@@ -799,6 +442,7 @@ extern volatile FLASH_t& FLASH;
 
 struct DAC_t
 {
+	//TODO additional space required between registers here
 	REGISTER
 			v32t EN1 :1;
 			v32t BOFF_OUTEN1 :1;

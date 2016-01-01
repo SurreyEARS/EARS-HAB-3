@@ -8,101 +8,141 @@
 #include <hal/mcu.hpp>
 
 #include <hal/generics.hpp>
-#include <mal/stm32f303vc.hpp>
+#include <mal/device.hpp>
 
 #include <hal/gio.hpp>
 #include <hal/rcc.hpp>
 
-/* Overflow time at 1ms approximately 49 years */
-static uint32_t systemTicksMs = 0;
+static uint64_t systemTicksMs = 0;
 
 /* Cannot delay for more than this many ms.
  * If this is more than half the watchdog period,
  * everything will break. */
-//TODO revert this value to 10ms
-static const uint32_t maxDelay = 99999U;
+//IMPROVE revert this value to 10ms
+sconst uint32_t maxDelay = 99999U;
 
-static const HAL::GIO::Port statusPinPort = HAL::GIO::Port::PORTE;
-static const uint32_t statusPin = 13U;
+sconst HAL::GIO::Port statusPort = HAL::GIO::Port::PORTE;
+sconst uint32_t statusPin = 13U;
+sconst uint32_t errorPin = 9U;
 
-namespace HAL {
-namespace MCU {
+namespace HAL
+{
+namespace MCU
+{
 
 void init()
 {
 	using namespace MAL::CM4;
 	using namespace HAL::GIO;
 
-	SYSTICK.RELOAD.B.reload = HAL::RCCM::getSystemClock()/1000U - 1U;
+	SYSTICK.RELOAD.B.reload = HAL::RCCM::getSystemClock() / 1000U - 1U;
 	SYSTICK.VAL = 0U;
 
 	SYSTICK.CTRL.B.clockSource = 1U;
 	SYSTICK.CTRL.B.interrupt = 1U;
 	SYSTICK.CTRL.B.enable = 1U;
-
-	configurePin(statusPinPort, statusPin, Mode::OUTPUT, Pullups::PULL_UP, Type::PUSH_PULL, Speed::FAST, 0);
 }
 
-uint32_t getTicks(void) {
+uint64_t getTicks(void)
+{
 	return systemTicksMs;
 }
 
-bool delayWhile(bool(*func)())
+uint64_t getMicroseconds(void)
 {
-	uint32_t start = getTicks();
-	uint32_t elapsed;
+	/* Justification:
+	 * The current microseconds value is the current ticks in ms plus progress to the nex tick.
+	 * Progress to the next tick is counted down, so ((RELOAD-VAL)/RELOAD)
+	 * Equivalent to 1-VAL/RELOAD
+	 * All multiplied by 1000
+	 *
+	 * To simplify logic, add one to systick - assume we have already ticked
+	 * Then SUBTRACT the countdown/reload
+	 */
+	using namespace MAL::CM4;
+	return (1000 * (systemTicksMs + 1) - (SYSTICK.VAL * 1000 / SYSTICK.RELOAD.B.reload));
+}
 
-	do {
+bool delayWhile(bool (*func)())
+{
+	uint64_t start = getTicks();
+	uint64_t elapsed;
+
+	do
+	{
 		elapsed = getTicks() - start;
 	} while (func() && elapsed < maxDelay);
 
 	return elapsed < maxDelay;
 }
 
-bool delayUntil(bool(*func)())
+bool delayUntil(bool (*func)())
 {
-	uint32_t start = getTicks();
-	uint32_t elapsed;
+	uint64_t start = getTicks();
+	uint64_t elapsed;
 
-	do {
+	do
+	{
 		elapsed = getTicks() - start;
 	} while (!func() && elapsed < maxDelay);
 
 	return elapsed < maxDelay;
 }
 
-void delayTicks(uint32_t delay) {
-	uint32_t start = getTicks();
-	uint32_t elapsed;
+void delayTicks(uint32_t delay)
+{
+	uint64_t start = getTicks();
+	uint64_t elapsed;
 
-	if (delay > maxDelay) {
+	if (delay > maxDelay)
+	{
 		delay = maxDelay;
 	}
 
-	do {
+	do
+	{
 		elapsed = getTicks() - start;
 	} while (elapsed < delay);
 }
 
-void SuspendTick(void) {
-	MAL::CM4::SYSTICK.CTRL.B.interrupt = 0U;
+void delayMicroseconds(uint32_t delay)
+{
+	uint64_t start = getMicroseconds();
+	uint64_t elapsed;
+
+	if ((delay/1000U) > maxDelay)
+	{
+		delay = maxDelay*1000U;
+	}
+
+	do
+	{
+		elapsed = getMicroseconds() - start;
+	} while (elapsed < delay);
 }
 
-void ResumeTick(void) {
-	MAL::CM4::SYSTICK.CTRL.B.interrupt = 1U;
+void SuspendTick(void)
+{
+	MAL::CM4::SYSTICK.CTRL.B.enable = 0U;
+}
+
+void ResumeTick(void)
+{
+	MAL::CM4::SYSTICK.CTRL.B.enable = 1U;
 }
 
 }
 }
 
-extern "C" {
+extern "C"
+{
 void HAL_MCU_IncrementTicks(void)
 {
 	systemTicksMs++;
 
 	if (0U == (systemTicksMs % 1000U))
 	{
-		HAL::GIO::toggle(statusPinPort, statusPin);
+		HAL::GIO::toggle(statusPort, statusPin);
 	}
 }
 

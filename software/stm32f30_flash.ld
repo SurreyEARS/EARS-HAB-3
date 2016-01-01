@@ -40,7 +40,8 @@ _Min_Stack_Size = 0x200; /* required amount of stack */
 /* Specify the memory areas */
 MEMORY
 {
-  FLASH (rx)      : ORIGIN = 0x08000000, LENGTH = 256K
+  FLASH (rx)      : ORIGIN = 0x08000000, LENGTH = 192K
+  CONFIG (rw)     : ORIGIN = 0x08000000 + 192K, LENGTH = 64K
   RAM (xrw)       : ORIGIN = 0x20000000, LENGTH = 40K
   MEMORY_B1 (rx)  : ORIGIN = 0x60000000, LENGTH = 0K
   CCMRAM (rw)     : ORIGIN = 0x10000000, LENGTH = 8K
@@ -110,6 +111,15 @@ SECTIONS
     KEEP (*(.fini_array*))
     PROVIDE_HIDDEN (__fini_array_end = .);
   } >FLASH
+  
+  /* Constant data also goes into FLASH */
+  .cfgdata :
+  {
+    . = ALIGN(4);
+    KEEP(*(.cfgdata))        /* .cfgdata sections (constants, strings, etc.) */
+    KEEP(*(.cfgdata*))        /* .cfgdata* sections (constants, strings, etc.) */
+    . = ALIGN(4);
+  } >CONFIG
 
   /* used by the startup to initialize data */
   _sidata = LOADADDR(.data);

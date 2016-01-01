@@ -30,6 +30,7 @@
 								<option id="com.atollic.truestudio.common_options.target.fpu.509283851" name="Floating point" superClass="com.atollic.truestudio.common_options.target.fpu" value="com.atollic.truestudio.common_options.target.fpu.hard" valueType="enumerated"/>
 								<option id="com.atollic.truestudio.as.symbols.defined.519827255" name="Defined symbols" superClass="com.atollic.truestudio.as.symbols.defined" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="HSE_VALUE=8000000"/>
+									<listOptionValue builtIn="false" value="DEBUG_BUILD"/>
 									<listOptionValue builtIn="false" value="STM32F303xC"/>
 								</option>
 								<option id="com.atollic.truestudio.as.general.incpath.686648637" name="Include path" superClass="com.atollic.truestudio.as.general.incpath" valueType="includePath">
@@ -83,7 +84,9 @@
 								<option id="com.atollic.truestudio.gpp.optimization.prep_data.865426884" name="Prepare dead data removal" superClass="com.atollic.truestudio.gpp.optimization.prep_data" value="true" valueType="boolean"/>
 								<option id="com.atollic.truestudio.gpp.optimization.fno_rtti.542747701" name="Disable RTTI" superClass="com.atollic.truestudio.gpp.optimization.fno_rtti" value="true" valueType="boolean"/>
 								<option id="com.atollic.truestudio.gpp.optimization.fno_exceptions.794957376" name="Disable exception handling" superClass="com.atollic.truestudio.gpp.optimization.fno_exceptions" value="true" valueType="boolean"/>
-								<option id="com.atollic.truestudio.gpp.misc.otherflags.176590407" name="Other options" superClass="com.atollic.truestudio.gpp.misc.otherflags" value="-std=c++11" valueType="string"/>
+								<option id="com.atollic.truestudio.gpp.misc.otherflags.176590407" name="Other options" superClass="com.atollic.truestudio.gpp.misc.otherflags" value="" valueType="string"/>
+								<option id="com.atollic.truestudio.common_options.target.interwork.58675926" name="Mix ARM/Thumb" superClass="com.atollic.truestudio.common_options.target.interwork"/>
+								<option id="com.atollic.truestudio.gpp.cppstandard.1386399313" name="C++ standard" superClass="com.atollic.truestudio.gpp.cppstandard" value="com.atollic.truestudio.gpp.cppstandard.gnupp0x" valueType="enumerated"/>
 								<inputType id="com.atollic.truestudio.gpp.input.1590286121" superClass="com.atollic.truestudio.gpp.input"/>
 							</tool>
 							<tool id="com.atollic.truestudio.exe.debug.toolchain.ldcc.2037166407" name="C++ Linker" superClass="com.atollic.truestudio.exe.debug.toolchain.ldcc">
@@ -127,7 +130,7 @@
 					<folderInfo id="com.atollic.truestudio.configuration.release.1546587777." name="/" resourcePath="">
 						<toolChain id="com.atollic.truestudio.exe.release.toolchain.1647477615" name="Atollic ARM Tools" superClass="com.atollic.truestudio.exe.release.toolchain">
 							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="com.atollic.truestudio.exe.release.toolchain.platform.1396928848" isAbstract="false" name="release platform" superClass="com.atollic.truestudio.exe.release.toolchain.platform"/>
-							<builder buildPath="${workspace_loc:/HAB3}/Release" id="com.atollic.truestudio.mbs.builder1.1174238085" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="CDT Internal Builder" superClass="com.atollic.truestudio.mbs.builder1"/>
+							<builder buildPath="${workspace_loc:/HAB3}/Release" customBuilderProperties="toolChainpathType=1|toolChainpathString=B:/Program Files (x86)/Atollic/TrueSTUDIO for ARM 5.4.0/ARMTools/bin|" id="com.atollic.truestudio.mbs.builder1.1174238085" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="CDT Internal Builder" superClass="com.atollic.truestudio.mbs.builder1"/>
 							<tool id="com.atollic.truestudio.exe.release.toolchain.as.471168037" name="Assembler" superClass="com.atollic.truestudio.exe.release.toolchain.as">
 								<option id="com.atollic.truestudio.common_options.target.endianess.1639338800" name="Endianess" superClass="com.atollic.truestudio.common_options.target.endianess"/>
 								<option id="com.atollic.truestudio.common_options.target.mcpu.1122745686" name="Microcontroller" superClass="com.atollic.truestudio.common_options.target.mcpu" value="STM32F303VC" valueType="enumerated"/>
@@ -144,11 +147,7 @@
 									<listOptionValue builtIn="false" value="STM32F303xC"/>
 								</option>
 								<option id="com.atollic.truestudio.gcc.directories.select.1873291496" name="Include path" superClass="com.atollic.truestudio.gcc.directories.select" valueType="includePath">
-									<listOptionValue builtIn="false" value="..\Drivers\CMSIS\Include"/>
-									<listOptionValue builtIn="false" value="..\Drivers\CMSIS\Device\ST\STM32F3xx\Include"/>
-									<listOptionValue builtIn="false" value="..\Drivers\STM32F3xx_HAL_Driver\Inc"/>
-									<listOptionValue builtIn="false" value="..\src"/>
-									<listOptionValue builtIn="false" value="../src"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/inc}&quot;"/>
 								</option>
 								<option id="com.atollic.truestudio.common_options.target.endianess.515333705" name="Endianess" superClass="com.atollic.truestudio.common_options.target.endianess"/>
 								<option id="com.atollic.truestudio.common_options.target.mcpu.1732492805" name="Microcontroller" superClass="com.atollic.truestudio.common_options.target.mcpu" value="STM32F303VC" valueType="enumerated"/>
@@ -175,11 +174,7 @@
 									<listOptionValue builtIn="false" value="STM32F303xC"/>
 								</option>
 								<option id="com.atollic.truestudio.gpp.directories.select.1449487760" name="Include path" superClass="com.atollic.truestudio.gpp.directories.select" valueType="includePath">
-									<listOptionValue builtIn="false" value="..\Drivers\CMSIS\Include"/>
-									<listOptionValue builtIn="false" value="..\Drivers\CMSIS\Device\ST\STM32F3xx\Include"/>
-									<listOptionValue builtIn="false" value="..\Drivers\STM32F3xx_HAL_Driver\Inc"/>
-									<listOptionValue builtIn="false" value="..\src"/>
-									<listOptionValue builtIn="false" value="../src"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/inc}&quot;"/>
 								</option>
 								<option id="com.atollic.truestudio.common_options.target.endianess.1540749120" name="Endianess" superClass="com.atollic.truestudio.common_options.target.endianess"/>
 								<option id="com.atollic.truestudio.common_options.target.mcpu.1134189792" name="Microcontroller" superClass="com.atollic.truestudio.common_options.target.mcpu" value="STM32F303VC" valueType="enumerated"/>
@@ -190,6 +185,9 @@
 								<option id="com.atollic.truestudio.gpp.optimization.prep_data.1749489039" name="Prepare dead data removal" superClass="com.atollic.truestudio.gpp.optimization.prep_data" value="true" valueType="boolean"/>
 								<option id="com.atollic.truestudio.gpp.optimization.fno_rtti.675164457" name="Disable RTTI" superClass="com.atollic.truestudio.gpp.optimization.fno_rtti" value="true" valueType="boolean"/>
 								<option id="com.atollic.truestudio.gpp.optimization.fno_exceptions.1470799007" name="Disable exception handling" superClass="com.atollic.truestudio.gpp.optimization.fno_exceptions" value="true" valueType="boolean"/>
+								<option id="com.atollic.truestudio.common_options.target.interwork.1237402715" name="Mix ARM/Thumb" superClass="com.atollic.truestudio.common_options.target.interwork"/>
+								<option id="com.atollic.truestudio.gpp.cppstandard.1265013041" name="C++ standard" superClass="com.atollic.truestudio.gpp.cppstandard" value="com.atollic.truestudio.gpp.cppstandard.gnupp0x" valueType="enumerated"/>
+								<option id="com.atollic.truestudio.exe.release.toolchain.gpp.optimization.level.1261719681" name="Optimization Level" superClass="com.atollic.truestudio.exe.release.toolchain.gpp.optimization.level" value="com.atollic.truestudio.gpp.optimization.level.03" valueType="enumerated"/>
 								<inputType id="com.atollic.truestudio.gpp.input.2013619490" superClass="com.atollic.truestudio.gpp.input"/>
 							</tool>
 							<tool id="com.atollic.truestudio.exe.release.toolchain.ldcc.1601087554" name="C++ Linker" superClass="com.atollic.truestudio.exe.release.toolchain.ldcc">

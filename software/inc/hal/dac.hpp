@@ -9,26 +9,33 @@
 
 #include <hal/generics.hpp>
 
-namespace HAL {
-namespace DAC {
+namespace HAL
+{
+namespace DAC
+{
 
-enum class Trigger {
-	HARDWARE,
-	SOFTWARE,
-	TIMER7
+enum class Trigger
+{
+	HARDWARE, SOFTWARE, TIMER7
 };
 
-void configure(Trigger trig, bool dualMode, bool use12Bits);
+struct InitStruct
+{
 
-namespace SINGLE {
+};
 
-void enable ();
+void configure(const InitStruct& config);
+void configure(Trigger trig, bool dualMode, bool use12Bits) _deprec;
+
+namespace SINGLE
+{
+
+void enable();
 void disable();
-void setData (uint16_t data);
+void setData(uint16_t data);
 void swTrigger();
 void startDMA(uint16_t* sourceBuffer, uint16_t count);
 
 }
-
 }
 }

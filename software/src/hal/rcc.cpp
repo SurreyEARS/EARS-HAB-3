@@ -7,7 +7,8 @@
 
 #include <hal/rcc.hpp>
 
-#include <mal/stm32f303vc.hpp>
+#include <mal/device.hpp>
+#include <mal/device_rcc.hpp>
 #include <hal/mcu.hpp>
 
 #define MRCC (MAL::F3C::RCCMOD)
@@ -17,10 +18,7 @@ namespace HAL
 namespace RCCM
 {
 
-static const bool HSE_EN = false;
 static const uint32_t HSE_FREQ = 8000000U;
-
-static const bool LSE_EN = false;
 static const uint32_t LSE_FREQ = 32768U;
 
 static bool isPLLRDY()
@@ -44,48 +42,20 @@ uint32_t getSystemClock()
 	{
 		return HSE_FREQ * (MRCC.CFGR.B.PLLMUL + 2);
 	}
-}
-
-uint32_t getHardwareClock()
-{
-	return getSystemClock();
+	//TODO Fix this so it works with things other than the default settings!
 }
 
 bool initClocks(void)
 {
-
-	/* Clock settings are detailed below.
-
-	 No external LS
-
-	 HSE-> PLL x16 -> SYSCLK
-
-	 This gives a 64MHz SYSCLK.
-
-	 AHB PS = /1 - for a 64MHz bus
-	 APB1 PS = /2 - for a 32MHz PCLK1
-	 APB2 PS = /1
-
-	 Peripherals clocked (in addition to system defaults):
-	 GPIO*
-	 DMA1, DMA2
-	 */
-
-	/* It is assumed that this function will only be called once; it assumes
-	 * that the current values of the registers are the same as those defined
-	 * in the reference manual.
+	/* We should probably check before destroying ALL THE CLOCKS, so if the PLL
+	 * is activated (a side effect of this method), fail. PLL should never be
+	 * set on reset unless someone is really messing around in startup.s.
 	 */
 
 	if (1U == MRCC.CR.B.PLLON)
 	{
 		return false;
 	}
-
-	/*
-	 * We should probably check before destroying ALL THE CLOCKS, so if the PLL
-	 * is activated (a side effect of this method), fail. PLL should never be
-	 * set on reset unless someone is really messing around in startup.s.
-	 */
 
 	/* This is critical. Tells the processor to insert wait states
 	 * when talking to the flash memory. Two is the appropriate number
@@ -127,10 +97,14 @@ bool initClocks(void)
 	HAL::MCU::delayUntil(&isPLLSYSCLK);
 
 	MRCC.AHB_CLKEN.B.IOPE_EN = 1U;
+	MRCC.AHB_CLKEN.B.IOPA_EN = 1U;
+
 	MRCC.AHB_CLKEN.B.DMA1_EN = 1U;
 	MRCC.AHB_CLKEN.B.DMA2_EN = 1U;
+	MRCC.AHB_CLKEN.B.CRC_EN = 1U;
 
 	MRCC.APB1_CLKEN.B.DAC1_EN = 1U;
+	MRCC.APB1_CLKEN.B.USB_EN = 1U;
 
 	return true;
 }

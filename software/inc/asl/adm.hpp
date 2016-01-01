@@ -12,48 +12,55 @@
 //TODO remove
 typedef int ADCNum;
 
-namespace ASL {
-namespace ADM {
+namespace ASL
+{
+namespace ADM
+{
 
-enum Operation {
-	Raw,
-	Filter,
-	Debounce
+enum Operation
+{
+	Raw, Filter, Debounce
 };
 
-class Channel {
+class Channel
+{
 public:
 	const ADCNum module;
 	const uint32_t channel;
 
-	Channel (ADCNum module, uint32_t channel);
+	Channel(ADCNum module, uint32_t channel);
 
-    void configure (Operation op, uint32_t multiplier = 1, int32_t constant = 0);
-    Operation getOperation();
-    uint32_t getMultiplier();
-    int32_t getConstant();
+	void configure(Operation op, uint32_t multiplier = 1, int32_t constant = 0);
+	Operation getOperation();
+	uint32_t getMultiplier();
+	int32_t getConstant();
 
-    void setEnable (bool enable);
-    bool getEnable ();
+	void setEnable(bool enable);
+	bool getEnable();
 
-    uint32_t getValue();
+	uint32_t getValue();
 
 private:
-    uint32_t value;
-    bool enabled;
+	uint32_t value;
+	bool enabled;
 
-    uint32_t rawValue;
-    Operation op;
-    uint32_t multiplier;
-    int32_t constant;
+	uint32_t rawValue;
+	Operation op;
+	uint32_t multiplier;
+	int32_t constant;
 
-    uint32_t previousRawValues[10];
+	uint32_t previousRawValues[10];
 
-    friend void setSample(Channel& ch, uint32_t newRaw);
+	friend void setSample(Channel& ch, uint32_t newRaw);
 };
 
-void configureModule();
-Channel& getChannelRef (uint32_t module, uint32_t channel);
+struct InitStruct
+{
+
+};
+
+void configure(const InitStruct& config);
+Channel& getChannelRef(uint32_t module, uint32_t channel);
 void sampleAll();
 
 }

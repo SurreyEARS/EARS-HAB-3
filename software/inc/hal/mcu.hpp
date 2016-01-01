@@ -9,15 +9,19 @@
 
 #include <hal/generics.hpp>
 
-namespace HAL {
-namespace MCU {
+namespace HAL
+{
+namespace MCU
+{
 
 void init();
-uint32_t getTicks(void);
+uint64_t getTicks(void);
+uint64_t getMicroseconds(void);
 
-bool delayWhile(bool(*func)());
-bool delayUntil(bool(*func)());
+bool delayWhile(bool (*func)());
+bool delayUntil(bool (*func)());
 void delayTicks(uint32_t delay);
+void delayMicroseconds(uint32_t delay);
 
 void SuspendTick(void);
 void ResumeTick(void);

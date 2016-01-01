@@ -8,3 +8,7 @@
 #pragma once
 
 #include <stdint.h>
+#define sconst static constexpr const
+
+#define _cfgdata __attribute__((section(".cfgdata")))
+#define _deprec __attribute__ ((deprecated))

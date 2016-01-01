@@ -5,7 +5,7 @@
  *      Author: James
  */
 
-#include <mal/stm32f303vc.hpp>
+#include <mal/device.hpp>
 
 #include <hal/dma.hpp>
 #include <hal/dac.hpp>
@@ -31,7 +31,7 @@ void configure(Trigger trig, bool dualMode, bool use12Bits)
 	trigger = trig;
 	if (trigger != Trigger::HARDWARE)
 	{
-		/* Enable hardware trigger */
+		/* Enable non-hardware trigger */
 		MAL::F3C::DAC.CR.B.TEN1 = 1U;
 
 		if (trigger == Trigger::TIMER7)

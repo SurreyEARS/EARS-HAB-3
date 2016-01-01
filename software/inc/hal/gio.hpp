@@ -9,57 +9,37 @@
 
 #include <hal/generics.hpp>
 
-namespace HAL {
-namespace GIO {
+namespace HAL
+{
+namespace GIO
+{
 
-enum class Port {
-	PORTA,
-	PORTB,
-	PORTC,
-	PORTD,
-	PORTE,
-	PORTF
+struct InitStruct
+{
+	uint32_t MODER[6];
+	uint32_t OTYPER[6];
+	uint32_t OSPEEDR[6];
+	uint32_t PUPDR[6];
+	uint32_t ODR[6];
+	uint32_t AFRL[6];
+	uint32_t AFRH[6];
 };
 
-enum class Mode {
-	INPUT,
-	OUTPUT,
-	ALTERNATE,
-	INOUT
-};
-
-enum class Pullups {
-	NONE,
-	PULL_UP,
-	PULL_DOWN,
-};
-
-enum class Type {
-	PUSH_PULL,
-	OPEN_DRAIN
-};
-
-enum class Speed {
-	SLOW,
-	MEDIUM,
-	FAST
-};
-
-enum class Defaults {
-	OUTPUT,
-	INPUT,
-	OUT_PUP
+enum class Port
+{
+	PORTA, PORTB, PORTC, PORTD, PORTE, PORTF
 };
 
 typedef void (*EIC_INT_Handler)(Port port, uint32_t pin);
 
-void set (Port port, uint32_t pin);
-void reset (Port port, uint32_t pin);
-void toggle (Port port, uint32_t pin);
-void setPort (Port port, uint16_t pins);
+uint32_t get(Port port, uint32_t pin);
+void set(Port port, uint32_t pin);
+void reset(Port port, uint32_t pin);
+void toggle(Port port, uint32_t pin);
+void setPort(Port port, uint16_t pins);
 
-void configurePin (Port port, uint32_t pin, Mode mode, Pullups pullups, Type type, Speed speed, uint32_t value);
-void configurePin (Port port, uint32_t pin, Defaults config, uint32_t value);
+void configure(const InitStruct& config);
+// NO TEST FUNCTION - Not internally testable
 
 }
 }

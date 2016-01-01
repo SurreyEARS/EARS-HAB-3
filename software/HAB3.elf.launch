@@ -37,7 +37,7 @@
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="4"/>
 </listAttribute>
-<stringAttribute key="org.eclipse.dsf.launch.MEMORY_BLOCKS" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#13;&#10;&lt;memoryBlockExpressionList context=&quot;reserved-for-future-use&quot;&gt;&#13;&#10;&lt;gdbmemoryBlockExpression address=&quot;768&quot; label=&quot;target&quot;/&gt;&#13;&#10;&lt;/memoryBlockExpressionList&gt;&#13;&#10;"/>
+<stringAttribute key="org.eclipse.dsf.launch.MEMORY_BLOCKS" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#13;&#10;&lt;memoryBlockExpressionList context=&quot;reserved-for-future-use&quot;&gt;&#13;&#10;&lt;gdbmemoryBlockExpression address=&quot;768&quot; label=&quot;target&quot;/&gt;&#13;&#10;&lt;gdbmemoryBlockExpression address=&quot;536911856&quot; label=&quot;&amp;amp;(val)&quot;/&gt;&#13;&#10;&lt;gdbmemoryBlockExpression address=&quot;134220784&quot; label=&quot;data&quot;/&gt;&#13;&#10;&lt;gdbmemoryBlockExpression address=&quot;134220796&quot; label=&quot;data&quot;/&gt;&#13;&#10;&lt;gdbmemoryBlockExpression address=&quot;536911848&quot; label=&quot;((uint8_t[2])(test))&quot;/&gt;&#13;&#10;&lt;gdbmemoryBlockExpression address=&quot;536911824&quot; label=&quot;&amp;amp;(b)&quot;/&gt;&#13;&#10;&lt;/memoryBlockExpressionList&gt;&#13;&#10;"/>
 <stringAttribute key="process_factory_id" value="org.eclipse.cdt.dsf.gdb.GdbProcessFactory"/>
-<stringAttribute key="saved_expressions&lt;seperator&gt;Unknown" value="0xe000edf8"/>
+<stringAttribute key="saved_expressions&lt;seperator&gt;Unknown" value="0xe000edf8,0x08030000U,0x08030400U,0x08030300U,0x0802FFF0,0x8002130,0x8002162,0x8002161,0x8002160,0x8002155,0x8035000"/>
 </launchConfiguration>

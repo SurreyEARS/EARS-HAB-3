@@ -15,7 +15,6 @@ namespace RCCM
 
 bool initClocks();
 uint32_t getSystemClock();
-uint32_t getHardwareClock();
 
 }
 }
